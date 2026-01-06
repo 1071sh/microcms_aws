@@ -1,4 +1,4 @@
-import { getNewsPost, getAllNewsIds } from "@/libs/news";
+import { getNewsPost } from "@/libs/news";
 import { formatDate } from "@/utils/format";
 import Link from "next/link";
 import styles from "./page.module.css";
