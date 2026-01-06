@@ -2,6 +2,10 @@ import Link from "next/link";
 import { getNewsPosts } from "@/libs/news";
 import styles from "@/app/page.module.css";
 
+// AWS Amplifyでキャッシュを無効化
+export const fetchCache = "force-no-store";
+export const dynamic = "force-dynamic";
+
 export default async function Home() {
   const posts = await getNewsPosts();
 
