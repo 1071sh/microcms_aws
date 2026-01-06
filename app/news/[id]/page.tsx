@@ -4,6 +4,10 @@ import Link from "next/link";
 import styles from "./page.module.css";
 import Image from "next/image";
 
+// AWS Amplifyでキャッシュを無効化
+export const fetchCache = "force-no-store";
+export const dynamic = "force-dynamic";
+
 export default async function NewsPostPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
   const post = await getNewsPost(id);
@@ -33,11 +37,11 @@ export default async function NewsPostPage({ params }: { params: Promise<{ id: s
   );
 }
 
-// 静的パスを生成
-export async function generateStaticParams() {
-  const contentIds = await getAllNewsIds();
-
-  return contentIds.map((contentId) => ({
-    id: contentId, // 各記事のIDをパラメータとして返す
-  }));
-}
+// generateStaticParamsは dynamic = 'force-dynamic' と競合するためコメントアウト
+// export async function generateStaticParams() {
+//   const contentIds = await getAllNewsIds();
+//
+//   return contentIds.map((contentId) => ({
+//     id: contentId,
+//   }));
+// }
