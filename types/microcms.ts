@@ -1,6 +1,6 @@
 import type { MicroCMSImage } from "microcms-js-sdk";
 
-export type NewsPosts = {
+export type NewsLists = {
   body?: string;
   id: string;
   title: string;
@@ -12,7 +12,7 @@ export type NewsPosts = {
   };
 };
 
-export type NewsPost = {
+export type NewsItem = {
   id: string;
   title: string;
   body: string;

@@ -1,30 +1,25 @@
 import { client } from "@/libs/microcms";
-import { NewsPosts, NewsPost } from "@/types/microcms";
+import { NewsLists, NewsItem } from "@/types/microcms";
+import { LIMIT } from "@/libs/constants";
 
-export const getNewsPosts = async (): Promise<NewsPosts[]> => {
+export const getNewsPosts = async (options?: { offset?: number }): Promise<{ contents: NewsLists[]; totalCount: number }> => {
   const data = await client.get({
     endpoint: "news",
     queries: {
       fields: "id,title,publishedAt,category,type",
-      limit: 5,
+      limit: LIMIT,
+      offset: options?.offset || 0,
     },
   });
-  return data.contents;
+  return {
+    contents: data.contents,
+    totalCount: data.totalCount,
+  };
 };
 
-export const getNewsPost = async (id: string): Promise<NewsPost> => {
+export const getNewsPost = async (id: string): Promise<NewsItem> => {
   const data = await client.get({
     endpoint: `news/${id}`,
   });
   return data;
-};
-
-export const getAllNewsIds = async (): Promise<string[]> => {
-  const data = await client.get({
-    endpoint: "news",
-    queries: {
-      fields: "id",
-    },
-  });
-  return data.contents.map((content: { id: string }) => content.id);
 };
