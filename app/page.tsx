@@ -3,6 +3,8 @@ import styles from "@/app/page.module.css";
 import NewsList from "./components/NewsList";
 import Pagination from "./components/pagination";
 
+export const revalidate = 0; // 追加
+
 export default async function Home() {
   const { contents, totalCount } = await getNewsPosts({
     offset: 0,
